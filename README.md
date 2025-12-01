@@ -5,7 +5,7 @@ I aim to solve each puzzle efficiently and elegantly, focusing on clean code and
 
 | Day | Title           | Language | Status |
 | --- | --------------- | -------- | ------ |
-| 1   | Secret Entrance | Python   |        |
+| 1   | Secret Entrance | Python   | ✅     |
 
 
 
