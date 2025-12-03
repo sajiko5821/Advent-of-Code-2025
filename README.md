@@ -5,9 +5,8 @@ I aim to solve each puzzle efficiently and elegantly, focusing on clean code and
 
 | Day | Title           | Language | Status |
 | --- | --------------- | -------- | ------ |
-| 1   | Secret Entrance | Python   | ✅     |
-
-
+| 01  | Secret Entrance | Python   | Done   |
+| 02  | Gift Shp        | Python   | Done   |
 
 ## 💻 Project Structure
 
