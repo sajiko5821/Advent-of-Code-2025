@@ -23,13 +23,12 @@ Input File: Contains the specific input data for that day's puzzle.
 .
 ├── day01/
 │   ├── solution.py
-│   └── input.txt
+│   └── (hidden) input.txt
 ├── day02/
 │   ├── solution.py
-│   └── input.txt
+│   └── (hidden) input.txt
 ├── ...
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 
 ## 🛠️ Technology Stack
