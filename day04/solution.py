@@ -49,8 +49,48 @@ def part1(grid: list[list[str]]) -> int:
                 continue
     return movable_rolls
 
+def part2(grid: list[list[str]]) -> int:
+    """Perform rounds of moving rolls until no more can be moved.
+
+    In each round collect all '@' cells that have fewer than 4 '@' neighbors,
+    then mark them as moved (set to '.'). Repeat rounds until
+    a round moves zero cells. Return the total number of moved rolls.
+    """
+    total_moved = 0
+    round_no = 0
+    while True:
+        round_no += 1
+        to_move: list[tuple[int, int]] = []
+
+        # Scan grid and collect moves for this round
+        for row in range(len(grid)):
+            for col in range(len(grid[0])):
+                if get_cell(grid, row, col) != '@':
+                    continue
+                neighbors = list(get_neighbors(grid, row, col))
+                paper_neighbors = []
+                for neighbor in neighbors:
+                    if neighbor == '@':
+                        paper_neighbors.append(neighbor)
+                if len(paper_neighbors) < 4:
+                    to_move.append((row, col))
+
+        # Apply moves
+        moved_this_round = 0
+        for r, c in to_move:
+            grid[r][c] = '.'
+            moved_this_round += 1
+
+        if moved_this_round == 0:
+            break
+
+        total_moved += moved_this_round
+
+    return total_moved
+
 
 if __name__ == "__main__":
     grid = read_grid()
 
     print(f"Total movable rolls: {part1(grid)}")
+    print(f"Total movable rolls: {part2(grid)}")
