@@ -17,7 +17,7 @@ def read_input() -> list[str]:
         return
 
 
-def find_max_joltage(input: list[str]) -> int:
+def find_max_joltage_part1(input: list[str]) -> int:
     print(f"--- Start Finding Max Joltage --- \n")
     total_joltage = 0
 
@@ -33,14 +33,45 @@ def find_max_joltage(input: list[str]) -> int:
                     max_value = value
 
         total_joltage += max_value
-        print(f"Bank: {line} -> {max_value} Jolts")
+        # print(f"Bank: {line} -> {max_value} Jolts")
 
     print(f"--- Finding Max Joltage Complete --- \n")
     print(f"Total Output Joltage: {total_joltage} Jolts \n")
     return total_joltage
 
+def find_max_joltage_part2(inputs, target_length: int) -> int:
+    best = 0
+    
+    for line in inputs:
+        length = len(line)
+
+        # Will hold the resulting digits. Using list for stack operations.
+        stack = []
+
+        for i in range(length):
+            # Pop smaller top while current digit is larger and enough digits remain for target_length.
+            while len(stack) > 0 and stack[-1] < line[i] and len(stack) + (length - i) > target_length:
+                stack.pop()
+            
+            # Add the current digit to the stack
+            stack.append(line[i])
+
+        # Ensure the resulting number is at most target_length digits long by popping from the end.
+        while len(stack) > target_length:
+            stack.pop()
+
+        # print(line, stack)
+        
+        # Join the digits, convert to integer, and add to the running total
+        best += int("".join(stack))
+
+    print(f"--- Finding Max Joltage Complete --- \n")
+    print(f"Total Output Joltage: {best} Jolts \n")
+    return best
 
 
 if __name__ == "__main__":
     input = read_input()
-    find_max_joltage(input)
+    find_max_joltage_part1(input)
+    find_max_joltage_part2(input, 12)
+

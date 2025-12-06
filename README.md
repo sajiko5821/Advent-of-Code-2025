@@ -7,7 +7,7 @@ I aim to solve each puzzle efficiently and elegantly, focusing on clean code and
 | --- | --------------- | -------- | -------- |
 | 01  | Secret Entrance | Python   | Done     |
 | 02  | Gift Shp        | Python   | Done     |
-| 03  | Lobby           | Python   | Part 1/2 |
+| 03  | Lobby           | Python   | Done |
 
 ## 💻 Project Structure
 
