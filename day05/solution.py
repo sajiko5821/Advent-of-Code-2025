@@ -1,73 +1,61 @@
 def read_input() -> list[str]:
-    processed_lines = []
+    print("--- Reading Input ---")
+    with open("day05/input.txt", 'r') as input_file:
+        processed_lines = []
+        for line in input_file:
+            # Strip whitespace from the line
+            clean_line = line.strip() 
+            print(f"{clean_line}")
+            processed_lines.append(clean_line)
+    print("--- Input Reading Complete --- \n")
+    return processed_lines
 
-    try:
-        with open("day05/input.txt", 'r') as input_file:
-            print("--- Starting File Processing ---")
-            for line in input_file:
-                # Strip whitespace/newlines from the line
-                clean_line = line.strip() 
-                print(f"{clean_line}")
-                processed_lines.append(clean_line)
-            print("--- File Processing Complete --- \n")
-            return processed_lines
 
-    except FileNotFoundError:
-        print("ERROR: The file 'input.txt' was not found. Please create it and add data.")
-        return
-        
-
-def fresh_ranges(input: list[str]) -> list[int]:
-    print(f"--- Start Finding FreshIDs --- \n")
-
-    while True:
-        fresh_id =  []
-        for line in input:
-            if line == "":
-                break
-            else:
-                start, end = map(int, line.split('-'))
-                for id in range(start, end + 1):
-                    if id not in fresh_id:
-                        fresh_id.append(id)
-                        print(fresh_id)
-        print(f" {fresh_id}  \n")
-        print(f"--- FreshIDs Found --- \n")
-        return fresh_id
-        
-def ingredients(input: list[str]) -> list[int]:
-    print(f"--- Start Ingredient Function --- \n")
-    ingredient_ids = []
-    ingredients = False
-    
+def process_input(input: list[str]) -> tuple[list[range], list[int]]:
+    print("--- Starting Input Processing ---")
+    ranges = []
+    ids = []
     for line in input:
-        if ingredients:
-            ingredient_ids.append(int(line))
+        if "-" in line:
+            (a, b) = line.split('-')
+            ranges.append(range(int(a), int(b) + 1))
         elif line != "":
-            continue
-        else:
-            ingredients = True
-            continue
-    
-    print(f" {ingredient_ids}  \n")
-    print(f"--- Ingredient IDs Found --- \n")
-    return ingredient_ids
+            ids.append(int(line))
 
-def check_freshness(fresh_ids: list[int], ingredient_ids: list[int]) -> list[int]:
-    fresh_ingredients = []
-    
-    for ingredient in ingredient_ids:
-        if ingredient in fresh_ids:
-            fresh_ingredients.append(ingredient)
-    
-    print(f" {fresh_ingredients}  \n")
-    print(f"Total Fresh Ingredients: {len(fresh_ingredients)} \n")
-    print(f"--- Fresh Ingredients Found --- \n")
-    return fresh_ingredients
+    ranges.sort(key=lambda r: (r.start, r.stop))
+    i = 0
+    while i < len(ranges):
+        range1 = ranges[i]
+        j = i + 1
+        while j < len(ranges):
+            range2 = ranges[j]
+            if range2.start <= range1.stop:
+                range1 = range(range1.start, max(range1.stop, range2.stop))
+                ranges[i] = range1
+                del ranges[j]
+            else:
+                break
+        i += 1
+
+    print("--- Input Processing Complete --- \n")
+    return ranges, ids
+
+
+def part1(ranges: list[range], ids: list[int]) -> int:
+    """Count how many `ids` are contained in any of the `ranges`."""
+    print("--- Starting Part 1 Calculation ---")
+    count = 0
+    for value in ids:
+        # Check if this value falls into ANY of the merged ranges.
+        if any(value in r for r in ranges):
+            count += 1
+
+    print(f"Part 1 Result: {count}")
+    print("--- Part 1 Calculation Complete --- \n")
+    return count
+
 
 if __name__ == "__main__":
     input = read_input()
-
-    fresh_ids = fresh_ranges(input)
-    ingredient_ids = ingredients(input)
-    check_freshness(fresh_ids, ingredient_ids)
+    ranges, ids = process_input(input)
+    part1(ranges, ids)

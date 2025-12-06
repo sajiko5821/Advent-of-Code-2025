@@ -3,12 +3,13 @@
 This repository houses my solutions for the annual Advent of Code challenge, a series of small programming puzzles released daily throughout December.
 I aim to solve each puzzle efficiently and elegantly, focusing on clean code and robust logic.
 
-| Day | Title               | Language | Status |
-| --- | ------------------- | -------- | ------ |
-| 01  | Secret Entrance     | Python   | Done   |
-| 02  | Gift Shop           | Python   | Done   |
-| 03  | Lobby               | Python   | Done   |
-| 04  | Printing Department | Python   | Done   |
+| Day | Title               | Language | Status   |
+| --- | ------------------- | -------- | -------- |
+| 01  | Secret Entrance     | Python   | Done     |
+| 02  | Gift Shop           | Python   | Done     |
+| 03  | Lobby               | Python   | Done     |
+| 04  | Printing Department | Python   | Done     |
+| 05  | Cafeteria           | Python   | Part 1/2 |
 
 ## 💻 Project Structure
 
