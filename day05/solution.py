@@ -55,7 +55,19 @@ def part1(ranges: list[range], ids: list[int]) -> int:
     return count
 
 
+def part2(ranges: list[range]) -> int:
+    """Count the total number of unique IDs in all ranges."""
+    print("--- Starting Part 2 Calculation ---")
+    all_ids = 0
+    for r in ranges:
+        all_ids += len(range(r.start, r.stop, 1))
+    print(f"Part 2 Result: {(all_ids)}")
+    print("--- Part 2 Calculation Complete --- \n")
+    return all_ids
+
+
 if __name__ == "__main__":
     input = read_input()
     ranges, ids = process_input(input)
     part1(ranges, ids)
+    part2(ranges)
